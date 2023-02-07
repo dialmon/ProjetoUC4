@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // TODO - Aumentar EdgeRadius no BoxCollider do Player
         playerRigidBody = gameObject.GetComponent<Rigidbody2D>();
     }
 
@@ -27,24 +28,19 @@ public class Player : MonoBehaviour
 
     void Movement()
     {
-
         var horizontalInput = Input.GetAxisRaw("Horizontal");
         playerRigidBody.velocity = new Vector2(horizontalInput * velocity, playerRigidBody.velocity.y);
-        //if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-        //{
-            //gameObject.transform.Translate(new Vector3(-1, 0, 0) * velocity * Time.deltaTime);
-        //}
-        //if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-        //{
-        //    gameObject.transform.Translate(new Vector3(1, 0, 0) * velocity * Time.deltaTime);
-        //}
     }
 
     void Jump()
     {
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow) || Input.GetButton("Jump"))
+        // Tutorial pulo: https://gamedevbeginner.com/how-to-jump-in-unity-with-or-without-physics/
+        // Documentação Input system: https://docs.unity3d.com/Packages/com.unity.inputsystem@1.4/manual/index.html
+        // TODO - restringir double jump
+        if (Input.GetButton("Jump"))
         {
-            gameObject.transform.Translate(new Vector3(0, jump, 0) * velocity * Time.deltaTime);
+            playerRigidBody.AddForce(Vector2.up * jump, ForceMode2D.Impulse);
         }
+
     }
 }
