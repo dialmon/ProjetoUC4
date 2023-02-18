@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Script_5 : MonoBehaviour
 {
+    public int damage;
     private Vector3 mousePos;
     private Camera mainCam;
     private Rigidbody2D rigby;
@@ -12,21 +13,29 @@ public class Script_5 : MonoBehaviour
 
     void Start()
     {
-        mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();    
+        mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         rigby = GetComponent<Rigidbody2D>();
         mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
         Vector3 direction = mousePos - transform.position;
         Vector3 rotation = transform.position - mousePos;
-        rigby.velocity = new Vector2(direction.x, direction.y).normalized * velociity; 
+        rigby.velocity = new Vector2(direction.x, direction.y).normalized * velociity;
 
         float rot = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0,0, rot + 90);
-        
+        transform.rotation = Quaternion.Euler(0, 0, rot + 90);
+
     }
 
     void Update()
     {
-        
+        Destroy(gameObject, 4);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Finish")
+        {
+            Destroy(this.gameObject);
+        }
     }
 
 }
