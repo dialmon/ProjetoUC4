@@ -18,7 +18,7 @@ public class Spawn : MonoBehaviour
 
     private void OnEnable()
     {
-        StartCoroutine(Spawn());
+        //StartCoroutine(Spawn());
     }
 
     // Update is called once per frame
@@ -26,7 +26,7 @@ public class Spawn : MonoBehaviour
     {
         
     }
-
+    /*
     IEnumerator Spawn()
     {
         while (stop)
@@ -35,5 +35,5 @@ public class Spawn : MonoBehaviour
             yield return new WaitForSeconds(time);
             Instantiate(clients[Random.Range(0, clients.Length)], transform.position, Quaternion.identity);
         }
-    }
+    }*/
 }
