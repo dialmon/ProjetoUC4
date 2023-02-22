@@ -46,6 +46,7 @@ public class EnemyHealth: MonoBehaviour
     {
         if (collision.tag == "Bullets")
         {
+            Script_5.instance.Damage();
             life -= 10;
         }
     }
