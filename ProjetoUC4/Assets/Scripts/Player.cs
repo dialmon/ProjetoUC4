@@ -8,15 +8,22 @@ public class Player : MonoBehaviour
     private float velocity;
 
     [SerializeField]
-    private float jump;
+    private float jumpHeight;
+
+    private float jumpForce;
+
+    private float normalGravity;
+    private float fallGravity = 4;
 
     private Rigidbody2D playerRigidBody;
 
     // Start is called before the first frame update
     void Start()
     {
-        // TODO - Aumentar EdgeRadius no BoxCollider do Player
         playerRigidBody = gameObject.GetComponent<Rigidbody2D>();
+
+        normalGravity = playerRigidBody.gravityScale;
+        jumpForce = Mathf.Sqrt(jumpHeight * -2 * (Physics2D.gravity.y * normalGravity));
     }
 
     // Update is called once per frame
@@ -34,12 +41,17 @@ public class Player : MonoBehaviour
 
     void Jump()
     {
-        // Tutorial pulo: https://gamedevbeginner.com/how-to-jump-in-unity-with-or-without-physics/
-        // Documentação Input system: https://docs.unity3d.com/Packages/com.unity.inputsystem@1.4/manual/index.html
-        // TODO - restringir double jump
+
         if (Input.GetButton("Jump"))
+            playerRigidBody.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+
+        if (playerRigidBody.velocity.y >= 0)
         {
-            playerRigidBody.AddForce(Vector2.up * jump, ForceMode2D.Impulse);
+            playerRigidBody.gravityScale = normalGravity;
+        }
+        else if (playerRigidBody.velocity.y < 0) // Caindo
+        {
+            playerRigidBody.gravityScale = fallGravity;
         }
 
     }
