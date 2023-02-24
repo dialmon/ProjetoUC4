@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -6,7 +7,6 @@ using UnityEngine.XR;
 
 public class Script_1 : MonoBehaviour
 {
-    public EnemyHealth enemyHealth;
 
     //outros
     public GameObject bullets;
@@ -15,11 +15,11 @@ public class Script_1 : MonoBehaviour
     public int magazineSize, bulletsPerTap;
     int bulletsLeft, bulletShot;
 
-    public bool canFire, allowButtonHold;
+    public bool allowButtonHold;
     bool shooting, readyToShoot, reloading;
 
     private float timer;
-    public float timeFire, timeBetShooting, spread, reloadTime, timeBetShoot;
+    public float    timeBetShooting, reloadTime, timeBetShoot;
 
 
     //mira do mouse
@@ -32,6 +32,11 @@ public class Script_1 : MonoBehaviour
     {
         // aqui estou dizendo para buscar meu main camera e acessar o componete camera dele
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        
+    }
+
+    void Awake()
+    {
         bulletsLeft = magazineSize;
         readyToShoot = true;
     }
@@ -61,11 +66,11 @@ public class Script_1 : MonoBehaviour
     {
         if (allowButtonHold)
         {
-            shooting = Input.GetKeyDown(KeyCode.Mouse0);
+            shooting = Input.GetKey(KeyCode.Mouse0);
         }
         else
         {
-            shooting = Input.GetKey(KeyCode.Mouse0);
+            shooting = Input.GetKeyDown(KeyCode.Mouse0);
         }
 
         if (readyToShoot && shooting && !reloading && bulletsLeft > 0)
@@ -77,6 +82,7 @@ public class Script_1 : MonoBehaviour
     public void Fire()
     {
         readyToShoot = false;
+
         Instantiate(bullets, weapon.transform.position, Quaternion.identity);
 
         bulletsLeft--;
@@ -86,7 +92,7 @@ public class Script_1 : MonoBehaviour
 
         if (bulletShot > 0 && bulletsLeft > 0)
         {
-            Invoke("shoot", timeBetShoot);
+            Invoke("Fire", timeBetShoot);
         }
     }
 

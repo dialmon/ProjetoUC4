@@ -99,10 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dc168a7af2054048b3acc78877fd58a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyLife: {fileID: -2033830375870143274, guid: 48c7dea420f4a0f448205b6831fd84e7, type: 3}
-  enemyHealth: {fileID: -6565845034250787940, guid: cbd0bd000498f16439e6a8f1442ffa69, type: 3}
   damage: 10
-  velociity: 50
+  velociity: 30
 --- !u!50 &1843608007245146290
 Rigidbody2D:
   serializedVersion: 4
