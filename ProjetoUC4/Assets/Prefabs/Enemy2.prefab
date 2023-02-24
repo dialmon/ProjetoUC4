@@ -139,5 +139,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {x: 0, y: 0}
-  life: 30
+  life: 20
+  maxLife: 20
   speed: 0

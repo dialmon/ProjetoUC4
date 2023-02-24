@@ -1,20 +1,23 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class EnemyHealth: MonoBehaviour
+public class EnemyHealth : MonoBehaviour
 {
-
     public Vector2 enemy;
     private Transform playerPosition;
 
-    public int life;
+    public int life, maxLife = 100;
     public int speed;
+
+    int amount;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        life = maxLife;
     }
 
     public void Awake()
@@ -26,7 +29,7 @@ public class EnemyHealth: MonoBehaviour
     void Update()
     {
         EnemyFollow();
-        Healty();
+       
     }
 
     public void EnemyFollow()
@@ -34,20 +37,13 @@ public class EnemyHealth: MonoBehaviour
         transform.position = Vector2.MoveTowards(transform.position, playerPosition.transform.position, speed * Time.deltaTime);
     }
 
-    public void Healty()
+    public void TakeDamage(int damage)
     {
-        if (life < 1)
+        life -= damage;
+
+        if (life <= 0) 
         {
             Destroy(gameObject);
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag == "Bullets")
-        {
-            Script_5.instance.Damage();
-            life -= 10;
         }
     }
 

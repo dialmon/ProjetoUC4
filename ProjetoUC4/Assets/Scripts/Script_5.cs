@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Script_5 : MonoBehaviour
 {
-    public static Script_5 instance;
 
     public int damage;
     private Vector3 mousePos;
@@ -27,26 +26,24 @@ public class Script_5 : MonoBehaviour
 
     }
 
-    public void Awake()
-    {
-        instance = this;
-    }
 
     void Update()
     {
         Destroy(gameObject, 4);
     }
 
-    public void Damage()
-    {
-        damage += 10;  
-    }
+
+
 
     public void OnTriggerEnter2D(Collider2D collision)
+
     {
-        if (collision.tag == "Finish")
+        if (collision.gameObject.TryGetComponent<EnemyHealth>(out EnemyHealth enemyComponent))
         {
+
+            enemyComponent.TakeDamage(damage);
             Destroy(this.gameObject);
+
         }
     }
 

@@ -2,16 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class Script_1 : MonoBehaviour
 {
+    public EnemyHealth enemyHealth;
 
     //outros
     public GameObject bullets;
     public Transform weapon;
-    public bool canFire;
+
+    public int magazineSize, bulletsPerTap;
+    int bulletsLeft, bulletShot;
+
+    public bool canFire, allowButtonHold;
+    bool shooting, readyToShoot, reloading;
+
     private float timer;
-    public float timeFire;
+    public float timeFire, timeBetShooting, spread, reloadTime, timeBetShoot;
+
 
     //mira do mouse
 
@@ -23,6 +32,8 @@ public class Script_1 : MonoBehaviour
     {
         // aqui estou dizendo para buscar meu main camera e acessar o componete camera dele
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        bulletsLeft = magazineSize;
+        readyToShoot = true;
     }
     void Update()
     {
@@ -42,28 +53,61 @@ public class Script_1 : MonoBehaviour
         //aqui apliquei o quaternion porque e usado para funcao de rotacao e euler para voltar um valor na rotacao z 
         transform.rotation = Quaternion.Euler(0, 0, rotZ);
 
-        Fire();
+        myInput();
+        Reload();
 
     }
+    public void myInput()
+    {
+        if (allowButtonHold)
+        {
+            shooting = Input.GetKeyDown(KeyCode.Mouse0);
+        }
+        else
+        {
+            shooting = Input.GetKey(KeyCode.Mouse0);
+        }
 
+        if (readyToShoot && shooting && !reloading && bulletsLeft > 0)
+        {
+            bulletShot = bulletsPerTap;
+            Fire();
+        }
+    }
     public void Fire()
     {
-        if (!canFire)
-        {
-            timer += Time.deltaTime;
-            if (timer > timeFire)
-            {
-                canFire = true;
-                timer = 0;
-            }
-        }
+        readyToShoot = false;
+        Instantiate(bullets, weapon.transform.position, Quaternion.identity);
 
-        if (Input.GetKey(KeyCode.Mouse0) && canFire)
+        bulletsLeft--;
+        bulletShot--;
+
+        Invoke("ResetShoot", timeBetShooting);
+
+        if (bulletShot > 0 && bulletsLeft > 0)
         {
-            canFire = false;
-            Instantiate(bullets, weapon.position, Quaternion.identity);
-            
+            Invoke("shoot", timeBetShoot);
         }
+    }
+
+    public void ResetShoot()
+    {
+        readyToShoot = true;
+    }
+
+    public void Reload()
+    {
+        if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && !reloading)
+        {
+            reloading = true;
+            Invoke("ReloadFinish", reloadTime);
+        }
+    }
+
+    public void ReloadFinish()
+    {
+        bulletsLeft = magazineSize;
+        reloading = false;
     }
 
 }
