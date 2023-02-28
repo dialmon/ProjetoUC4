@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.XR;
@@ -26,6 +27,10 @@ public class Script_1 : MonoBehaviour
 
     private Camera mainCam;
     private Vector3 mousePos;
+
+    //textmesh
+
+    public TextMeshProUGUI text;
 
 
     void Start()
@@ -60,6 +65,8 @@ public class Script_1 : MonoBehaviour
 
         myInput();
         Reload();
+
+        text.SetText(bulletsLeft + "/" + magazineSize);
 
     }
     public void myInput()
