@@ -6,41 +6,31 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    public Vector2 enemy;
-    private Transform playerPosition;
+
+    // esse script criei para que os inimigo receba dano da munição
 
     public int life, maxLife = 100;
-    public int speed;
-
-    int amount;
 
     // Start is called before the first frame update
     void Start()
     {
+        //aqui eu falo para que o inimigo comece recebendo a vida maxima dito para a vida base do inimigo
         life = maxLife;
-    }
-
-    public void Awake()
-    {
-        playerPosition = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     // Update is called once per frame
     void Update()
     {
-        EnemyFollow();
-       
+              
     }
 
-    public void EnemyFollow()
-    {
-        transform.position = Vector2.MoveTowards(transform.position, playerPosition.transform.position, speed * Time.deltaTime);
-    }
-
+    //int damage e para tomar dano da "damage" do script da munição 
     public void TakeDamage(int damage)
     {
+        //aqui onde tudo começa para tomar dano
         life -= damage;
 
+        //se a vida for igual a 0 vai destruir o objeto
         if (life <= 0) 
         {
             Destroy(gameObject);
