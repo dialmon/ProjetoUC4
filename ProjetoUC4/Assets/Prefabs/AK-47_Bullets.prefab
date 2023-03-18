@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6170828457198983021}
   - component: {fileID: 8753336328192492478}
   m_Layer: 0
-  m_Name: Bullets
+  m_Name: AK-47_Bullets
   m_TagString: Bullets
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dc168a7af2054048b3acc78877fd58a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 5
   velociity: 30
 --- !u!50 &1843608007245146290
 Rigidbody2D:
@@ -164,7 +164,7 @@ AudioSource:
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
-  Mute: 0
+  Mute: 1
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
