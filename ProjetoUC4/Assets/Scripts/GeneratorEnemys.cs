@@ -33,6 +33,8 @@ public class GeneratorEnemys : MonoBehaviour
 
         Instantiate(SpawnEnemys[objectRandom], SpawnPoints[pointRandom].position, Quaternion.Euler(0f, 0f, 0f));
         timerCurrentSpawns = timerMaxSpawns;
+
+        Debug.Log(timerCurrentSpawns);
     }
 
 }
