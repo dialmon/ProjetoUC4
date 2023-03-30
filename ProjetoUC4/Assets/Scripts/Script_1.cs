@@ -31,7 +31,7 @@ public class Script_1 : MonoBehaviour
 
     //textmesh
 
-    public TextMeshProUGUI text;
+    //public TextMeshProUGUI text;
 
 
     void Start()
@@ -69,7 +69,7 @@ public class Script_1 : MonoBehaviour
         Reload();
 
         //textmeshpro para mostrar a munição na tela
-        text.SetText(bulletsLeft + "/" + magazineSize);
+        //text.SetText(bulletsLeft + "/" + magazineSize);
 
     }
     public void myInput()

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
@@ -17,9 +18,19 @@ public class Player : MonoBehaviour
 
     private Rigidbody2D playerRigidBody;
 
+
+    private PlayerInput playerInput;
+    private Vector2 horizontalInput;
+
+    public bool grounded;
+
     // Start is called before the first frame update
     void Start()
     {
+        grounded = true;
+
+        playerInput = gameObject.GetComponent<PlayerInput>();
+
         playerRigidBody = gameObject.GetComponent<Rigidbody2D>();
 
         normalGravity = playerRigidBody.gravityScale;
@@ -27,32 +38,31 @@ public class Player : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
-        Movement();
-        Jump();
+        playerRigidBody.velocity = new Vector2(horizontalInput.x * velocity, playerRigidBody.velocity.y);
+
+        // grounded = Physics2D.Raycast(transform.position, Vector2.down, 0.5f);
+
+        if (playerRigidBody.velocity.y < 0) // Caindo
+        {
+            grounded = true;
+        }
     }
 
-    void Movement()
+    public void OnMovement(InputAction.CallbackContext context)
     {
-        var horizontalInput = Input.GetAxisRaw("Horizontal");
-        playerRigidBody.velocity = new Vector2(horizontalInput * velocity, playerRigidBody.velocity.y);
+        horizontalInput = context.ReadValue<Vector2>();
     }
 
-    void Jump()
+    public void OnJump(InputAction.CallbackContext context)
     {
-
-        if (Input.GetButton("Jump"))
-            playerRigidBody.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
-
-        if (playerRigidBody.velocity.y >= 0)
+        if (grounded)
         {
-            playerRigidBody.gravityScale = normalGravity;
-        }
-        else if (playerRigidBody.velocity.y < 0) // Caindo
-        {
-            playerRigidBody.gravityScale = fallGravity;
-        }
+            // TODO - corrrigir pulo
+            transform.Translate(new Vector3(0, jumpHeight, 0) * Time.deltaTime);
 
+            grounded = false;
+        }
     }
 }
