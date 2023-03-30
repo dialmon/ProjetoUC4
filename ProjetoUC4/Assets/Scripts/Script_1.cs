@@ -13,6 +13,7 @@ public class Script_1 : MonoBehaviour
     //tudo que e necessario para atirar
     public GameObject bullets;
     public Transform weapon;
+    public TextMeshProUGUI reloadInfoText;
 
     public int magazineSize, bulletsPerTap;
     int bulletsLeft, bulletShot;
@@ -112,7 +113,10 @@ public class Script_1 : MonoBehaviour
         if (bulletShot > 0 && bulletsLeft > 0)
         {
             Invoke("Fire", timeBetShoot);
+            
         }
+
+        
     }
 
     public void ResetShoot()
@@ -123,12 +127,13 @@ public class Script_1 : MonoBehaviour
 
     public void Reload()
     {
-
+        reloadInfoText.text = string.Format("Press R to Reload ");
         //aqui fiz uma mecanica de recarregar a arma 
         if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && !reloading)
         {
             //se a munição for menor que o tamanho do carregador ele vaia tivar o bool "reloading" e vai carregar
             reloading = true;
+            
 
             //quando ativar o bool ele vai entrar no evento invoke e vai chamar "reloadfinish" que vai colocar o bool no false e carregar a munição
             Invoke("ReloadFinish", reloadTime);
