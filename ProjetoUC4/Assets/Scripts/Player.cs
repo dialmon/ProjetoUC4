@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     public bool grounded;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         grounded = true;
 
@@ -35,6 +35,16 @@ public class Player : MonoBehaviour
 
         normalGravity = playerRigidBody.gravityScale;
         jumpForce = Mathf.Sqrt(jumpHeight * -2 * (Physics2D.gravity.y * normalGravity));
+    }
+
+    private void OnEnable()
+    {
+        playerInput.actions.Enable();
+    }
+
+    private void OnDisable()
+    {
+        playerInput.actions.Disable();
     }
 
     // Update is called once per frame
@@ -59,6 +69,8 @@ public class Player : MonoBehaviour
     {
         if (grounded)
         {
+
+            if(context.)
             // TODO - corrrigir pulo
             transform.Translate(new Vector3(0, jumpHeight, 0) * Time.deltaTime);
 
