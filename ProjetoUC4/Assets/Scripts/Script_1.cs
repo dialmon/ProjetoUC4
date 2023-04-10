@@ -21,7 +21,7 @@ public class Script_1 : MonoBehaviour
     public bool allowButtonHold;
     bool shooting, readyToShoot, reloading;
 
-    private float timer;
+   
     public float    timeBetShooting, reloadTime, timeBetShoot;
 
 
@@ -80,11 +80,13 @@ public class Script_1 : MonoBehaviour
         if (allowButtonHold)
         {
             shooting = Input.GetKey(KeyCode.Mouse0);
+            
         }
         else
         {
             //caso contrario se bool for false precisa apertar varias vezes para atirar
             shooting = Input.GetKeyDown(KeyCode.Mouse0);
+            
         }
 
         // aqui eu fiz essa gambiarra para fazer uma mecanica de burst fire que e para atirar 3 munição apenas
@@ -100,7 +102,12 @@ public class Script_1 : MonoBehaviour
         //aqui onde faz o player atirar o prefab bullet 
         readyToShoot = false;
 
+
         Instantiate(bullets, weapon.transform.position, Quaternion.identity);
+
+
+        //chama o audio do tiro da arma
+        GetComponent<AudioSource>().Play();
 
         //caso o player atire ira diminuir a munição 
         bulletsLeft--;
@@ -113,6 +120,8 @@ public class Script_1 : MonoBehaviour
         if (bulletShot > 0 && bulletsLeft > 0)
         {
             Invoke("Fire", timeBetShoot);
+
+            
             
         }
 
@@ -127,7 +136,7 @@ public class Script_1 : MonoBehaviour
 
     public void Reload()
     {
-        reloadInfoText.text = string.Format("Press R to Reload ");
+
         //aqui fiz uma mecanica de recarregar a arma 
         if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && !reloading)
         {
@@ -145,6 +154,17 @@ public class Script_1 : MonoBehaviour
         //oque eu expliquei la em cima resume aqui
         bulletsLeft = magazineSize;
         reloading = false;
+    }
+
+    public void endFire()
+    {
+        Animator anim = GetComponent<Animator>();
+        anim.SetInteger("Fire", 1);
+
+        Animator anim1 = GetComponent<Animator>();
+        anim.SetInteger("Fire", 0);
+
+
     }
 
 }
