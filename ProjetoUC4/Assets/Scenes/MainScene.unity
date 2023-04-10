@@ -9478,8 +9478,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 5
-  jumpHeight: 100
-  grounded: 0
+  jumpHeight: 200
 --- !u!114 &1851462820
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Interactions;
 
 public class Player : MonoBehaviour
 {
@@ -11,30 +13,17 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float jumpHeight;
 
-    private float jumpForce;
-
-    private float normalGravity;
-    private float fallGravity = 4;
-
     private Rigidbody2D playerRigidBody;
-
 
     private PlayerInput playerInput;
     private Vector2 horizontalInput;
 
-    public bool grounded;
-
     // Start is called before the first frame update
     void Awake()
     {
-        grounded = true;
-
         playerInput = gameObject.GetComponent<PlayerInput>();
 
         playerRigidBody = gameObject.GetComponent<Rigidbody2D>();
-
-        normalGravity = playerRigidBody.gravityScale;
-        jumpForce = Mathf.Sqrt(jumpHeight * -2 * (Physics2D.gravity.y * normalGravity));
     }
 
     private void OnEnable()
@@ -51,13 +40,6 @@ public class Player : MonoBehaviour
     public void Update()
     {
         playerRigidBody.velocity = new Vector2(horizontalInput.x * velocity, playerRigidBody.velocity.y);
-
-        // grounded = Physics2D.Raycast(transform.position, Vector2.down, 0.5f);
-
-        if (playerRigidBody.velocity.y < 0) // Caindo
-        {
-            grounded = true;
-        }
     }
 
     public void OnMovement(InputAction.CallbackContext context)
@@ -67,14 +49,11 @@ public class Player : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (grounded)
+        if (context.phase == InputActionPhase.Started)
         {
+            float newY = transform.position.y + jumpHeight;
 
-            if(context.)
-            // TODO - corrrigir pulo
-            transform.Translate(new Vector3(0, jumpHeight, 0) * Time.deltaTime);
-
-            grounded = false;
+            transform.Translate(new Vector3(0, newY, 0) * Time.deltaTime);
         }
     }
 }
