@@ -1,0 +1,54 @@
+{
+    "name": "WeaponInputs",
+    "maps": [
+        {
+            "name": "Weapon",
+            "id": "011106b4-74e4-44ce-b1af-c8af36fcbfba",
+            "actions": [
+                {
+                    "name": "Reload",
+                    "type": "Button",
+                    "id": "0a25b14b-aa78-45ff-b3fa-8badda3919cb",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Shoot",
+                    "type": "Button",
+                    "id": "7546468b-8401-4f9d-b53c-2ffbbbf20906",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "8fac6121-927f-4e87-ab0a-510004f3fda9",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reload",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "69cc4303-58f6-497b-8bbf-241cf744c39f",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Hold,Tap",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
