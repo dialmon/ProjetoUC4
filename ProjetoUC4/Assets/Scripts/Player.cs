@@ -15,11 +15,15 @@ public class Player : MonoBehaviour
     private float normalGravity;
     private float fallGravity = 4;
 
+    SpriteRenderer playerFlip;
+
     private Rigidbody2D playerRigidBody;
 
     // Start is called before the first frame update
     void Start()
     {
+        playerFlip = GetComponent<SpriteRenderer>();
+
         playerRigidBody = gameObject.GetComponent<Rigidbody2D>();
 
         normalGravity = playerRigidBody.gravityScale;
@@ -35,8 +39,28 @@ public class Player : MonoBehaviour
 
     void Movement()
     {
-        var horizontalInput = Input.GetAxisRaw("Horizontal");
+        float horizontalInput = Input.GetAxisRaw("Horizontal");
         playerRigidBody.velocity = new Vector2(horizontalInput * velocity, playerRigidBody.velocity.y);
+
+        /*if (horizontalInput > 0)
+        {
+            transform.localScale = new Vector3 (5f, 5f, 5f);
+        }
+
+        else if (horizontalInput < 0)
+        {
+           transform.localScale = new Vector3 (-5f, 5f, 5f);
+        }*/
+
+        if (horizontalInput > 0)
+        {
+           playerFlip.flipX = false;
+        }
+
+        else if (horizontalInput < 0)
+        {
+            playerFlip.flipX = true;
+        }
     }
 
     void Jump()
