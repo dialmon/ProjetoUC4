@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Interactions;
 
 public class Player : MonoBehaviour
 {
@@ -10,37 +13,39 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float jumpHeight;
 
-    private float jumpForce;
-
-    private float normalGravity;
-    private float fallGravity = 4;
-
     SpriteRenderer playerFlip;
 
     private Rigidbody2D playerRigidBody;
 
+    private PlayerInput playerInput;
+    private Vector2 horizontalInput;
+
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         playerFlip = GetComponent<SpriteRenderer>();
 
-        playerRigidBody = gameObject.GetComponent<Rigidbody2D>();
+        playerInput = gameObject.GetComponent<PlayerInput>();
 
-        normalGravity = playerRigidBody.gravityScale;
-        jumpForce = Mathf.Sqrt(jumpHeight * -2 * (Physics2D.gravity.y * normalGravity));
+        playerRigidBody = gameObject.GetComponent<Rigidbody2D>();
     }
+    /*
+    private void OnEnable()
+    {
+        playerInput.actions.Enable();
+    }
+
+    private void OnDisable()
+    {
+        playerInput.actions.Disable();
+    }
+    */
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
-        Movement();
-        Jump();
-    }
+        playerRigidBody.velocity = new Vector2(horizontalInput.x * velocity, playerRigidBody.velocity.y);
 
-    void Movement()
-    {
-        float horizontalInput = Input.GetAxisRaw("Horizontal");
-        playerRigidBody.velocity = new Vector2(horizontalInput * velocity, playerRigidBody.velocity.y);
 
         /*if (horizontalInput > 0)
         {
@@ -54,7 +59,7 @@ public class Player : MonoBehaviour
 
         if (horizontalInput > 0)
         {
-           playerFlip.flipX = false;
+            playerFlip.flipX = false;
         }
 
         else if (horizontalInput < 0)
@@ -63,20 +68,18 @@ public class Player : MonoBehaviour
         }
     }
 
-    void Jump()
+    public void OnMovement(InputAction.CallbackContext context)
     {
+        horizontalInput = context.ReadValue<Vector2>();
+    }
 
-        if (Input.GetButton("Jump"))
-            playerRigidBody.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
-
-        if (playerRigidBody.velocity.y >= 0)
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
         {
-            playerRigidBody.gravityScale = normalGravity;
-        }
-        else if (playerRigidBody.velocity.y < 0) // Caindo
-        {
-            playerRigidBody.gravityScale = fallGravity;
-        }
+            float newY = transform.position.y + jumpHeight;
 
+            transform.Translate(new Vector3(0, newY, 0) * Time.deltaTime);
+        }
     }
 }
