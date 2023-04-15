@@ -29,7 +29,7 @@ public class EnemyHealth : MonoBehaviour
     {
         //aqui onde tudo começa para tomar dano
         life -= damage;
-        gameObject.GetComponent<Animator>().SetBool("TakeHit", true);
+        //gameObject.GetComponent<Animator>().SetBool("TakeHit", true);
         //se a vida for igual a 0 vai destruir o objeto
         if (life <= 0) 
         {
