@@ -19,9 +19,9 @@ public class PlayerLife : MonoBehaviour
     {
         
     }
-    public void TakeDamage (int damage)
+    public void PlayerTakeDamage (int takingDamage)
     {
-        playerLife -= damage;
+        playerLife -= takingDamage;
         if (playerLife <= 0)
         {
             //SceneManager.LoadScene(SceneManager.GetActiveScene().name);

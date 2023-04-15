@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerTakeDamage : MonoBehaviour
 {
-    public int damage;
+    public int enemyDamage;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,12 +17,12 @@ public class PlayerTakeDamage : MonoBehaviour
         
     }
 
-    public void OnTriggerEnter2D(Collider2D collision)
+    public void OnTriggerEnter2D(Collider2D damageTake)
     {
-        if (collision.gameObject.TryGetComponent<PlayerLife>(out PlayerLife giveDamage))
+        if (damageTake.gameObject.TryGetComponent<PlayerLife>(out PlayerLife giveDamage))
         {
             Debug.Log($"take damage");
-            giveDamage.TakeDamage(damage);
+            giveDamage.PlayerTakeDamage(enemyDamage);
         }
     }
 }
