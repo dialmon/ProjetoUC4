@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Interactions;
 
 public class Player : MonoBehaviour
 {
@@ -10,49 +13,48 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float jumpHeight;
 
-    private float jumpForce;
-
-    private float normalGravity;
-    private float fallGravity = 4;
-
     private Rigidbody2D playerRigidBody;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        playerRigidBody = gameObject.GetComponent<Rigidbody2D>();
+    private PlayerInput playerInput;
+    private Vector2 horizontalInput;
 
-        normalGravity = playerRigidBody.gravityScale;
-        jumpForce = Mathf.Sqrt(jumpHeight * -2 * (Physics2D.gravity.y * normalGravity));
+    // Start is called before the first frame update
+    void Awake()
+    {
+        playerInput = gameObject.GetComponent<PlayerInput>();
+
+        playerRigidBody = gameObject.GetComponent<Rigidbody2D>();
     }
+    /*
+    private void OnEnable()
+    {
+        playerInput.actions.Enable();
+    }
+
+    private void OnDisable()
+    {
+        playerInput.actions.Disable();
+    }
+    */
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
-        Movement();
-        Jump();
+        playerRigidBody.velocity = new Vector2(horizontalInput.x * velocity, playerRigidBody.velocity.y);
     }
 
-    void Movement()
+    public void OnMovement(InputAction.CallbackContext context)
     {
-        var horizontalInput = Input.GetAxisRaw("Horizontal");
-        playerRigidBody.velocity = new Vector2(horizontalInput * velocity, playerRigidBody.velocity.y);
+        horizontalInput = context.ReadValue<Vector2>();
     }
 
-    void Jump()
+    public void OnJump(InputAction.CallbackContext context)
     {
-
-        if (Input.GetButton("Jump"))
-            playerRigidBody.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
-
-        if (playerRigidBody.velocity.y >= 0)
+        if (context.phase == InputActionPhase.Started)
         {
-            playerRigidBody.gravityScale = normalGravity;
-        }
-        else if (playerRigidBody.velocity.y < 0) // Caindo
-        {
-            playerRigidBody.gravityScale = fallGravity;
-        }
+            float newY = transform.position.y + jumpHeight;
 
+            transform.Translate(new Vector3(0, newY, 0) * Time.deltaTime);
+        }
     }
 }

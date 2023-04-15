@@ -521,7 +521,6 @@ MonoBehaviour:
   timeBetShooting: 0.2
   reloadTime: 1
   timeBetShoot: 1
-  text: {fileID: 0}
 --- !u!1 &474950333
 GameObject:
   m_ObjectHideFlags: 0
@@ -538,7 +537,7 @@ GameObject:
   m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &474950334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -559,7 +558,6 @@ MonoBehaviour:
   timeBetShooting: 0.05
   reloadTime: 0.5
   timeBetShoot: 0.08
-  text: {fileID: 0}
 --- !u!4 &474950335
 Transform:
   m_ObjectHideFlags: 0
@@ -9008,7 +9006,7 @@ GameObject:
   m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1341049470
 Transform:
   m_ObjectHideFlags: 0
@@ -9045,7 +9043,6 @@ MonoBehaviour:
   timeBetShooting: 0.09
   reloadTime: 0.9
   timeBetShoot: 0
-  text: {fileID: 0}
 --- !u!4 &1579048933 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8341562782386843998, guid: bc48cfee0292eff42b4e97fd6e42ab9a, type: 3}
@@ -9206,7 +9203,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 45
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -9324,7 +9321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 5
-  jumpHeight: 10
+  jumpHeight: 200
 --- !u!4 &2043409431162367166 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6578038734410073089, guid: de8c253c46d45044ca76b7a64dd6b9be, type: 3}
