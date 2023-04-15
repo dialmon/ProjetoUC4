@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
 
         playerRigidBody = gameObject.GetComponent<Rigidbody2D>();
     }
-
+    /*
     private void OnEnable()
     {
         playerInput.actions.Enable();
@@ -35,6 +35,7 @@ public class Player : MonoBehaviour
     {
         playerInput.actions.Disable();
     }
+    */
 
     // Update is called once per frame
     public void Update()
