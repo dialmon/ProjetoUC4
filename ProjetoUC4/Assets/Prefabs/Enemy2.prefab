@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2068661938247323465}
   - component: {fileID: -8043378339246183667}
   - component: {fileID: -6565845034250787940}
+  - component: {fileID: -5241911520603604933}
   m_Layer: 0
   m_Name: Enemy2
   m_TagString: Finish
@@ -138,7 +139,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aed90a7a8f6fc9e4f95fd6b265a34579, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {x: 0, y: 0}
   life: 20
-  maxLife: 20
-  speed: 0
+  maxLife: 30
+--- !u!114 &-5241911520603604933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 986111448843585182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9127d980f8c2c1b43911e2f7035347d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 40
