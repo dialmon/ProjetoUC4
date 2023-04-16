@@ -9,6 +9,10 @@ using UnityEngine.XR;
 
 public class Script_1 : MonoBehaviour
 {
+    public Canvas canvasControll;
+    public TextMeshProUGUI reloadText;
+
+    private PlayerLife life;
 
     //tudo que e necessario para atirar
     public GameObject bullets;
@@ -43,7 +47,8 @@ public class Script_1 : MonoBehaviour
 
     void Awake()
     {
-        //aqui onde vai começar com munição cheio e vai ativar o bool "readytoshoot" para true
+        
+        //aqui onde vai comeï¿½ar com muniï¿½ï¿½o cheio e vai ativar o bool "readytoshoot" para true
         bulletsLeft = magazineSize;
         readyToShoot = true;
     }
@@ -68,7 +73,7 @@ public class Script_1 : MonoBehaviour
         myInput();
         Reload();
 
-        //textmeshpro para mostrar a munição na tela
+        //textmeshpro para mostrar a muniï¿½ï¿½o na tela
         //text.SetText(bulletsLeft + "/" + magazineSize);
 
     }
@@ -86,10 +91,10 @@ public class Script_1 : MonoBehaviour
             shooting = Input.GetKeyDown(KeyCode.Mouse0);
         }
 
-        // aqui eu fiz essa gambiarra para fazer uma mecanica de burst fire que e para atirar 3 munição apenas
+        // aqui eu fiz essa gambiarra para fazer uma mecanica de burst fire que e para atirar 3 muniï¿½ï¿½o apenas
         if (readyToShoot && shooting && !reloading && bulletsLeft > 0)
         {
-            //o tiro vai receber tiro por aperto assim atirando apenas certa quantidade de munição
+            //o tiro vai receber tiro por aperto assim atirando apenas certa quantidade de muniï¿½ï¿½o
             bulletShot = bulletsPerTap;
             Fire();
         }
@@ -101,7 +106,7 @@ public class Script_1 : MonoBehaviour
 
         Instantiate(bullets, weapon.transform.position, Quaternion.identity);
 
-        //caso o player atire ira diminuir a munição 
+        //caso o player atire ira diminuir a muniï¿½ï¿½o 
         bulletsLeft--;
         bulletShot--;
 
@@ -124,14 +129,24 @@ public class Script_1 : MonoBehaviour
     public void Reload()
     {
 
+        if (bulletsLeft <= 0 && !reloading)
+        {
+        
+        EnableText();
+        reloadText.text = "Press R to Reload";
+
+        }
+
         //aqui fiz uma mecanica de recarregar a arma 
         if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && !reloading)
         {
-            //se a munição for menor que o tamanho do carregador ele vaia tivar o bool "reloading" e vai carregar
+
+            //se a muniï¿½ï¿½o for menor que o tamanho do carregador ele vaia tivar o bool "reloading" e vai carregar
             reloading = true;
 
-            //quando ativar o bool ele vai entrar no evento invoke e vai chamar "reloadfinish" que vai colocar o bool no false e carregar a munição
+            //quando ativar o bool ele vai entrar no evento invoke e vai chamar "reloadfinish" que vai colocar o bool no false e carregar a muniï¿½ï¿½o
             Invoke("ReloadFinish", reloadTime);
+            DisableText();
         }
     }
 
@@ -142,4 +157,12 @@ public class Script_1 : MonoBehaviour
         reloading = false;
     }
 
+    public void EnableText ()
+    {
+        canvasControll.gameObject.SetActive(true);
+    }
+    public void DisableText ()
+    {
+        canvasControll.gameObject.SetActive(false);
+    }
 }
