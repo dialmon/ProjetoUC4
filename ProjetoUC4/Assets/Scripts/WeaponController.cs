@@ -9,13 +9,15 @@ public class WeaponController : MonoBehaviour
     private Weapon weapon;
     // private int currentWeapon;
 
-    int bulletsLeft, bulletShot;
+    public int bulletsLeft, bulletShot;
 
     bool shooting, readyToShoot, reloading;
 
     //mira do mouse
     private Camera mainCam;
     private Vector3 mousePos;
+
+    private float lastShot;
 
     // textmesh munição
     // public TextMeshProUGUI text;
@@ -39,6 +41,9 @@ public class WeaponController : MonoBehaviour
         // Rotação da arma; Tem q ser direto na arma, se não roda na posição errada
         weapon.Rotate(mousePos);
 
+        ResetShoot();
+        //ReloadFinish();
+
         //textmeshpro para mostrar a munição na tela
         //text.SetText(bulletsLeft + "/" + magazineSize);
     }
@@ -56,16 +61,8 @@ public class WeaponController : MonoBehaviour
     public void OnShoot(InputAction.CallbackContext context)
     {
         // aqui se eu deixar o bool "allowbuttomhold" true pode segurar o botao de atirar que o player vai continuar atirando
-        if (weapon.allowButtonHold)
-        {
-
-            shooting = context.interaction is HoldInteraction;
-        }
-        else
-        {
-            //caso contrario se bool for false precisa apertar varias vezes para atirar
-            shooting = context.interaction is TapInteraction;
-        }
+        shooting = (weapon.allowButtonHold && context.interaction is HoldInteraction && context.phase == InputActionPhase.Performed) ||
+            (context.interaction is TapInteraction && context.phase == InputActionPhase.Started);
 
         // aqui eu fiz essa gambiarra para fazer uma mecanica de burst fire que e para atirar 3 munição apenas
         if (readyToShoot && shooting && !reloading && bulletsLeft > 0)
@@ -77,29 +74,32 @@ public class WeaponController : MonoBehaviour
     }
     public void Fire()
     {
-        //aqui onde faz o player atirar o prefab bullet 
-        readyToShoot = false;
-
-        Instantiate(weapon.bullets, weapon.transform.position, Quaternion.identity);
-
-        //caso o player atire ira diminuir a munição 
-        bulletsLeft--;
-        bulletShot--;
-
-        //aqui uso o evento invoke para resetar meu tiro e poder atirar novamente com o tempo entre tiros assim nao atirando muito rapido
-        Invoke("ResetShoot", weapon.timeBetShooting);
-
-
-        if (bulletShot > 0 && bulletsLeft > 0)
+        if (bulletShot > 0 && bulletsLeft > 0 && Time.time - lastShot >= weapon.timeBetShoot)
         {
-            Invoke("Fire", weapon.timeBetShoot);
+            //aqui onde faz o player atirar o prefab bullet 
+            readyToShoot = false;
+
+            Instantiate(weapon.bullets, weapon.transform.position, Quaternion.identity);
+
+            //caso o player atire ira diminuir a munição 
+            bulletsLeft--;
+            bulletShot--;
+
+            lastShot = Time.time;
+
+            //aqui uso o evento invoke para resetar meu tiro e poder atirar novamente com o tempo entre tiros assim nao atirando muito rapido
+            // Invoke("ResetShoot", weapon.timeBetShooting);
+
+
+            //Invoke("Fire", weapon.timeBetShoot);
         }
     }
 
     public void ResetShoot()
     {
         //como dito la em cima essa parte e para resetar meu tiro 
-        readyToShoot = true;
+        if (Time.time - lastShot >= weapon.timeBetShooting)
+            readyToShoot = true;
     }
 
     public void OnReload(InputAction.CallbackContext context)
