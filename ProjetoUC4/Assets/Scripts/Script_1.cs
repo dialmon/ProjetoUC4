@@ -11,6 +11,7 @@ public class Script_1 : MonoBehaviour
 {
     public Canvas canvasControll;
     public TextMeshProUGUI reloadText;
+    public TextMeshProUGUI text;
 
     private PlayerLife life;
 
@@ -74,7 +75,7 @@ public class Script_1 : MonoBehaviour
         Reload();
 
         //textmeshpro para mostrar a muni��o na tela
-        //text.SetText(bulletsLeft + "/" + magazineSize);
+        text.SetText(bulletsLeft + "/" + magazineSize);
 
     }
     public void myInput()
