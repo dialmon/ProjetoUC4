@@ -30,4 +30,13 @@ public class PlayerLife : MonoBehaviour
             Destroy(gameObject);
         }    
     }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "InstaKill")
+        {
+            Debug.Log($"voce morreu");
+            Destroy(gameObject);
+        }
+    }
 }
