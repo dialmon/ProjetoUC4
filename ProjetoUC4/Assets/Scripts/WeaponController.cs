@@ -9,9 +9,9 @@ public class WeaponController : MonoBehaviour
     private Weapon weapon;
     // private int currentWeapon;
 
-    public int bulletsLeft, bulletShot;
+    public int bulletsLeft, bulletShot, taps, bulletCounter = 0;
 
-    bool shooting, readyToShoot, reloading;
+    public bool shooting, readyToShoot, reloading;
 
     //mira do mouse
     private Camera mainCam;
@@ -44,6 +44,15 @@ public class WeaponController : MonoBehaviour
         ResetShoot();
         //ReloadFinish();
 
+        // aqui eu fiz essa gambiarra para fazer uma mecanica de burst fire que e para atirar 3 munição apenas
+        if (readyToShoot && (shooting || taps > 0) && !reloading && bulletsLeft > 0)
+        {
+            //o tiro vai receber tiro por aperto assim atirando apenas certa quantidade de munição
+            bulletShot = weapon.bulletsPerTap;
+            Fire();
+        }
+        
+
         //textmeshpro para mostrar a munição na tela
         //text.SetText(bulletsLeft + "/" + magazineSize);
     }
@@ -60,16 +69,15 @@ public class WeaponController : MonoBehaviour
 
     public void OnShoot(InputAction.CallbackContext context)
     {
+
         // aqui se eu deixar o bool "allowbuttomhold" true pode segurar o botao de atirar que o player vai continuar atirando
         shooting = (weapon.allowButtonHold && context.interaction is HoldInteraction && context.phase == InputActionPhase.Performed) ||
             (context.interaction is TapInteraction && context.phase == InputActionPhase.Started);
 
-        // aqui eu fiz essa gambiarra para fazer uma mecanica de burst fire que e para atirar 3 munição apenas
-        if (readyToShoot && shooting && !reloading && bulletsLeft > 0)
+        if (!weapon.allowButtonHold && shooting)
         {
-            //o tiro vai receber tiro por aperto assim atirando apenas certa quantidade de munição
-            bulletShot = weapon.bulletsPerTap;
-            Fire();
+            taps++;
+            Debug.Log(context.interaction is TapInteraction && context.phase == InputActionPhase.Started);
         }
     }
     public void Fire()
@@ -80,10 +88,13 @@ public class WeaponController : MonoBehaviour
             readyToShoot = false;
 
             Instantiate(weapon.bullets, weapon.transform.position, Quaternion.identity);
+            bulletCounter++;
 
             //caso o player atire ira diminuir a munição 
             bulletsLeft--;
             bulletShot--;
+
+            taps--;
 
             lastShot = Time.time;
 
