@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5714654252774345762}
   - component: {fileID: 1540306783770876153}
-  - component: {fileID: 2125324568329022485}
   - component: {fileID: 1843608007245146290}
   - component: {fileID: 6170828457198983021}
   - component: {fileID: 8753336328192492478}
+  - component: {fileID: -448454841884657951}
   m_Layer: 0
   m_Name: AK-47_Bullets
   m_TagString: Bullets
@@ -88,20 +88,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2125324568329022485
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7526188309183723791}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1dc168a7af2054048b3acc78877fd58a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 5
-  velociity: 30
 --- !u!50 &1843608007245146290
 Rigidbody2D:
   serializedVersion: 4
@@ -245,3 +231,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-448454841884657951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7526188309183723791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4287c4f891d05534987f295df1f1c51a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 5
+  velociity: 30

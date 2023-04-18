@@ -594,7 +594,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 429191468}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf259af47dfe59d4c805c5e846436214, type: 3}
+  m_Script: {fileID: 11500000, guid: 27415b79c41c53445928496f6b87c87f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bullets: {fileID: 7526188309183723791, guid: 33d1fa3cc738c0e41ae58e628b1f2005, type: 3}
@@ -614,7 +614,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 474950335}
-  - component: {fileID: 474950334}
+  - component: {fileID: 474950336}
   m_Layer: 0
   m_Name: M4A1Rotate
   m_TagString: Untagged
@@ -622,26 +622,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &474950334
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 474950333}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf259af47dfe59d4c805c5e846436214, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bullets: {fileID: 7526188309183723791, guid: b6ad787298b8768448961d5d95a1ac5b, type: 3}
-  weapon: {fileID: 670871776}
-  magazineSize: 30
-  bulletsPerTap: 3
-  allowButtonHold: 0
-  timeBetShooting: 0.05
-  reloadTime: 0.5
-  timeBetShoot: 0.08
 --- !u!4 &474950335
 Transform:
   m_ObjectHideFlags: 0
@@ -658,6 +638,26 @@ Transform:
   m_Father: {fileID: 1851462817}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &474950336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 474950333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27415b79c41c53445928496f6b87c87f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullets: {fileID: 7526188309183723791, guid: b6ad787298b8768448961d5d95a1ac5b, type: 3}
+  weapon: {fileID: 670871776}
+  magazineSize: 30
+  bulletsPerTap: 3
+  allowButtonHold: 0
+  timeBetShooting: 0.05
+  reloadTime: 0.5
+  timeBetShoot: 0.08
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -9066,7 +9066,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1341049469}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf259af47dfe59d4c805c5e846436214, type: 3}
+  m_Script: {fileID: 11500000, guid: 27415b79c41c53445928496f6b87c87f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bullets: {fileID: 7526188309183723791, guid: e5303d9a0a046ee4480f79b4579585d5, type: 3}
