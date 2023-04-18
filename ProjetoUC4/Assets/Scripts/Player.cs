@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
+using UnityEngine.TerrainTools;
 
 public class Player : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class Player : MonoBehaviour
     private PlayerInput playerInput;
     private Vector2 horizontalInput;
 
+    private Animator pAnimator;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -28,6 +31,8 @@ public class Player : MonoBehaviour
         playerInput = gameObject.GetComponent<PlayerInput>();
 
         playerRigidBody = gameObject.GetComponent<Rigidbody2D>();
+
+        pAnimator = GetComponent<Animator>();
     }
     /*
     private void OnEnable()
@@ -57,12 +62,12 @@ public class Player : MonoBehaviour
            transform.localScale = new Vector3 (-5f, 5f, 5f);
         }*/
 
-        if (horizontalInput > 0)
+        if (horizontalInput.x > 0)
         {
             playerFlip.flipX = false;
         }
 
-        else if (horizontalInput < 0)
+        else if (horizontalInput.x < 0)
         {
             playerFlip.flipX = true;
         }
@@ -71,6 +76,15 @@ public class Player : MonoBehaviour
     public void OnMovement(InputAction.CallbackContext context)
     {
         horizontalInput = context.ReadValue<Vector2>();
+
+        if (horizontalInput.x == 0)
+        {
+            pAnimator.Play("PlayerIdle");
+        }
+        else if (horizontalInput.x != 0)
+        {
+            pAnimator.Play("PlayerRun");
+        }
     }
 
     public void OnJump(InputAction.CallbackContext context)
