@@ -76,7 +76,7 @@ public class WeaponController : MonoBehaviour
 
         if (!weapon.allowButtonHold && shooting)
         {
-            taps++;
+            taps += weapon.bulletsPerTap;
             Debug.Log(context.interaction is TapInteraction && context.phase == InputActionPhase.Started);
         }
     }
