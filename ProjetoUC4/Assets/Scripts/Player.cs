@@ -18,12 +18,16 @@ public class Player : MonoBehaviour
     private PlayerInput playerInput;
     private Vector2 horizontalInput;
 
+    private GroundCheck groundCheck;
+
     // Start is called before the first frame update
     void Awake()
     {
         playerInput = gameObject.GetComponent<PlayerInput>();
 
         playerRigidBody = gameObject.GetComponent<Rigidbody2D>();
+
+        groundCheck = gameObject.GetComponentInChildren<GroundCheck>();
     }
     /*
     private void OnEnable()
@@ -50,11 +54,13 @@ public class Player : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Started)
+        if (context.phase == InputActionPhase.Started && groundCheck.grounded)
         {
-            float newY = transform.position.y + jumpHeight;
+            //float newY = transform.position.y + jumpHeight;
 
-            transform.Translate(new Vector3(0, newY, 0) * Time.deltaTime);
+            //transform.Translate(new Vector3(0, newY, 0) * Time.deltaTime);
+
+            playerRigidBody.velocity = Vector2.up * 8f;
         }
     }
 }

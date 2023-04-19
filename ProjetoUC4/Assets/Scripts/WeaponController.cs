@@ -9,9 +9,9 @@ public class WeaponController : MonoBehaviour
     private Weapon weapon;
     // private int currentWeapon;
 
-    public int bulletsLeft, bulletShot, taps;
+    int bulletsLeft, bulletShot, taps;
 
-    public bool shooting, readyToShoot, reloading;
+    bool shooting, readyToShoot, reloading;
 
     //mira do mouse
     private Camera mainCam;
