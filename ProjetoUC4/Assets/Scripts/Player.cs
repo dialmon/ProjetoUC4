@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     private float velocity;
 
     [SerializeField]
-    private float jumpHeight;
+    private float jumpHeight, jumpForce = 8f;
 
     private Rigidbody2D playerRigidBody;
 
@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
 
         groundCheck = gameObject.GetComponentInChildren<GroundCheck>();
     }
-    /*
+
     private void OnEnable()
     {
         playerInput.actions.Enable();
@@ -39,7 +39,6 @@ public class Player : MonoBehaviour
     {
         playerInput.actions.Disable();
     }
-    */
 
     // Update is called once per frame
     public void Update()
@@ -57,10 +56,9 @@ public class Player : MonoBehaviour
         if (context.phase == InputActionPhase.Started && groundCheck.grounded)
         {
             //float newY = transform.position.y + jumpHeight;
-
             //transform.Translate(new Vector3(0, newY, 0) * Time.deltaTime);
 
-            playerRigidBody.velocity = Vector2.up * 8f;
+            playerRigidBody.velocity = Vector2.up * jumpForce;
         }
     }
 }
