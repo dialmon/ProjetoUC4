@@ -618,6 +618,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ee4b104459153f4089c68f81fb64fb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvasControll: {fileID: 0}
+  reloadText: {fileID: 0}
+  text: {fileID: 0}
   bullets: {fileID: 7526188309183723791, guid: 33d1fa3cc738c0e41ae58e628b1f2005, type: 3}
   weapon: {fileID: 1579048933}
   magazineSize: 15
@@ -656,6 +659,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf259af47dfe59d4c805c5e846436214, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvasControll: {fileID: 0}
+  reloadText: {fileID: 0}
+  text: {fileID: 0}
   bullets: {fileID: 7526188309183723791, guid: b6ad787298b8768448961d5d95a1ac5b, type: 3}
   weapon: {fileID: 670871776}
   magazineSize: 30
@@ -9242,6 +9248,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ee4b104459153f4089c68f81fb64fb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvasControll: {fileID: 0}
+  reloadText: {fileID: 0}
+  text: {fileID: 0}
   bullets: {fileID: 7526188309183723791, guid: e5303d9a0a046ee4480f79b4579585d5, type: 3}
   weapon: {fileID: 159449786}
   magazineSize: 30
@@ -9687,8 +9696,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a93c8af7101eb2b41848c65b7a3039f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rToRespawn: {fileID: 0}
   playerLife: 0
   playerMaxLife: 100
+  sceneLoad: 
 --- !u!4 &2043409431162367166 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6578038734410073089, guid: de8c253c46d45044ca76b7a64dd6b9be, type: 3}
