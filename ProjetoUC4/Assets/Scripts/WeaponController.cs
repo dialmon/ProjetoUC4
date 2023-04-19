@@ -9,7 +9,7 @@ public class WeaponController : MonoBehaviour
     private Weapon weapon;
     // private int currentWeapon;
 
-    public int bulletsLeft, bulletShot, taps, bulletCounter = 0;
+    public int bulletsLeft, bulletShot, taps;
 
     public bool shooting, readyToShoot, reloading;
 
@@ -64,6 +64,7 @@ public class WeaponController : MonoBehaviour
         //aqui onde vai começar com munição cheio e vai ativar o bool "readytoshoot" para true
         bulletsLeft = weapon.magazineSize;
         readyToShoot = true;
+        taps = 0;
     }
 
 
@@ -74,10 +75,9 @@ public class WeaponController : MonoBehaviour
         shooting = (weapon.allowButtonHold && context.interaction is HoldInteraction && context.phase == InputActionPhase.Performed) ||
             (context.interaction is TapInteraction && context.phase == InputActionPhase.Started);
 
-        if (!weapon.allowButtonHold && shooting)
+        if (!weapon.allowButtonHold && shooting && bulletsLeft > 0 && taps <= 0)
         {
             taps += weapon.bulletsPerTap;
-            Debug.Log(context.interaction is TapInteraction && context.phase == InputActionPhase.Started);
         }
     }
     public void Fire()
@@ -88,7 +88,6 @@ public class WeaponController : MonoBehaviour
             readyToShoot = false;
 
             Instantiate(weapon.bullets, weapon.transform.position, Quaternion.identity);
-            bulletCounter++;
 
             //caso o player atire ira diminuir a munição 
             bulletsLeft--;

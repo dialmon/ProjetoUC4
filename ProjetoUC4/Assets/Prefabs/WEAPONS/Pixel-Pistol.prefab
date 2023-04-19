@@ -93,19 +93,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8341562782099534844}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf259af47dfe59d4c805c5e846436214, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHealth: {fileID: 0}
   bullets: {fileID: 7526188309183723791, guid: e5303d9a0a046ee4480f79b4579585d5, type: 3}
   weapon: {fileID: 8341562782386843998}
   magazineSize: 15
   bulletsPerTap: 1
-  canFire: 0
   allowButtonHold: 0
-  timeFire: 0.5
   timeBetShooting: 0.2
   reloadTime: 0.09
   timeBetShoot: 1
