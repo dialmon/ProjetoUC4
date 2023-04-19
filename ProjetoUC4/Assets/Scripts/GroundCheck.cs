@@ -6,32 +6,26 @@ public class GroundCheck : MonoBehaviour
 {
     public bool grounded;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
-    void Update()
-    {
+    void Update() { }
 
-    }
-
-    // Verifica se está pulando ou não
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // Caso um objeto com tag Ground entre no collider, grounded recebe true
         if (collision != null && collision.gameObject.tag == "Ground")
             grounded = true;
     }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
+        // Caso um objeto com tag Ground entre e fique no collider, grounded recebe true
         if (collision != null && collision.gameObject.tag == "Ground")
             grounded = true;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        // Caso um objeto com tag Ground saia do collider, grounded recebe false
         if (collision != null && collision.gameObject.tag == "Ground")
             grounded = false;
     }
