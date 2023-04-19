@@ -7,9 +7,11 @@ using UnityEngine.InputSystem.Interactions;
 
 public class Player : MonoBehaviour
 {
+    // Velocidade da movimentação
     [SerializeField]
     private float velocity;
 
+    // Altura e força do pulo
     [SerializeField]
     private float jumpHeight, jumpForce = 8f;
 
@@ -23,7 +25,7 @@ public class Player : MonoBehaviour
     SpriteRenderer playerFlip;
     private Animator pAnimator;
 
-    // Start is called before the first frame update
+    // Inicialização das variáveis
     void Awake()
     {
         playerInput = gameObject.GetComponent<PlayerInput>();
@@ -50,8 +52,10 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
+        // Movimentação do player
         playerRigidBody.velocity = new Vector2(horizontalInput.x * velocity, playerRigidBody.velocity.y);
 
+        // Flip do sprite do player
         if (horizontalInput.x > 0)
         {
             playerFlip.flipX = false;
@@ -62,21 +66,27 @@ public class Player : MonoBehaviour
         }
     }
 
+    // Método chamado pelo input system (WASD)
     public void OnMovement(InputAction.CallbackContext context)
     {
+        // Pega o valor do input
         horizontalInput = context.ReadValue<Vector2>();
 
+        // se o eixo x do player for 0 roda animação idle, se for diferente disso roda a animação run
         if (horizontalInput.x == 0)
         {
             pAnimator.Play("PlayerIdle");
         }
-        else if (horizontalInput.x != 0)
+        else
         {
             pAnimator.Play("PlayerRun");
         }
     }
+
+    // Método chamado pelo input system (Space)
     public void OnJump(InputAction.CallbackContext context)
     {
+        // Após verificar as condições de pulo, solta a animação jump
         if (context.phase == InputActionPhase.Started && groundCheck.grounded)
         {
             //float newY = transform.position.y + jumpHeight;
@@ -86,12 +96,13 @@ public class Player : MonoBehaviour
 
             pAnimator.Play("PlayerJump");
         }
+        // verificação do segundo pulo para refazer animação jump
         else if (context.phase == InputActionPhase.Started && !groundCheck.grounded && playerRigidBody.velocity.y > 0)
         {
             playerRigidBody.velocity = Vector2.up * jumpForce;
-
             pAnimator.Play("PlayerJump");
         }
+        // qd para de aumentar o valor y solta a animação fall
         else if (context.phase == InputActionPhase.Canceled && playerRigidBody.velocity.y > 0)
         {
             playerRigidBody.velocity = new Vector2(playerRigidBody.velocity.x, playerRigidBody.velocity.y * 0.5f);
