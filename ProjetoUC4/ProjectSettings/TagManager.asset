@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Bullets
   - InstaKill
+  - Ground
   layers:
   - Default
   - TransparentFX

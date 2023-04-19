@@ -18,13 +18,21 @@ public class GroundCheck : MonoBehaviour
 
     }
 
+    // Verifica se está pulando ou não
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        grounded = true;
+        if (collision != null && collision.gameObject.tag == "Ground")
+            grounded = true;
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision != null && collision.gameObject.tag == "Ground")
+            grounded = true;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        grounded = false;
+        if (collision != null && collision.gameObject.tag == "Ground")
+            grounded = false;
     }
 }
