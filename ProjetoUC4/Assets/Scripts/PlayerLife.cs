@@ -48,6 +48,7 @@ public class PlayerLife : MonoBehaviour
     {
         if (collision.tag == "InstaKill")
         {
+            TextOn();
             Debug.Log($"voce morreu");
             Destroy(gameObject);
         }

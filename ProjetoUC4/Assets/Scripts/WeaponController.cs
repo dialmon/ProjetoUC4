@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
@@ -8,6 +9,10 @@ public class WeaponController : MonoBehaviour
 {
     private Weapon weapon;
     // private int currentWeapon;
+
+    public Canvas canvasControll;
+    public TextMeshProUGUI reloadText;
+    public TextMeshProUGUI text;
 
     int bulletsLeft, bulletShot, taps;
 
@@ -53,6 +58,16 @@ public class WeaponController : MonoBehaviour
         
         //textmeshpro para mostrar a munição na tela
         //text.SetText(bulletsLeft + "/" + magazineSize);
+        DisableText();
+        text.SetText(bulletsLeft + "/" + weapon.magazineSize);
+
+        if (bulletsLeft <= 0)
+        {
+
+            EnableText();
+            reloadText.text = "Press R to Reload";
+
+        }
     }
 
     private void ChangeGun()
@@ -110,6 +125,14 @@ public class WeaponController : MonoBehaviour
     // Método chamado pelo input system (R)
     public void OnReload(InputAction.CallbackContext context)
     {
+
+        if (bulletsLeft <= 0)
+        {
+
+            EnableText();
+
+        }
+
         // Se há balas suficientes e não estiver recarregando
         if (bulletsLeft < weapon.magazineSize && !reloading)
         {
@@ -126,5 +149,14 @@ public class WeaponController : MonoBehaviour
         // o que eu expliquei la em cima resume aqui
         bulletsLeft = weapon.magazineSize;
         reloading = false;
+    }
+
+    public void EnableText()
+    {
+        canvasControll.gameObject.SetActive(true);
+    }
+    public void DisableText()
+    {
+        canvasControll.gameObject.SetActive(false);
     }
 }
