@@ -2512,8 +2512,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 20, y: 125}
-  m_SizeDelta: {x: 500, y: 50}
+  m_AnchoredPosition: {x: 21, y: 134}
+  m_SizeDelta: {x: 697.8, y: 69.78}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1765299676
 MonoBehaviour:
@@ -2535,7 +2535,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: UC4 Project
+  m_text: hellsing shooter
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 65fa2270b24163541b0c736541998a13, type: 2}
   m_sharedMaterial: {fileID: -175146197764022621, guid: 65fa2270b24163541b0c736541998a13, type: 2}
